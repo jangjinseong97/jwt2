@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Getter
 @ConfigurationProperties(prefix = "constant.jwt-const")
-@RequiredArgsConstructor
+@RequiredArgsConstructor // final 붙은 얘들만 받겠다는 뜻
 @ToString
 public class JwtConst {
     private final String issuer;
