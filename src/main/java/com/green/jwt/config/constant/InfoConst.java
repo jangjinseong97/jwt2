@@ -13,4 +13,5 @@ public class InfoConst {
     private final String title;
     private final String description;
     private final String version;
+    // swagger용 데이터 주입을 위해
 }

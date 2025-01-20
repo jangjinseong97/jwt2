@@ -3,6 +3,7 @@ package com.green.jwt.user;
 import com.green.jwt.user.model.UserSignInReq;
 import com.green.jwt.user.model.UserSignInRes;
 import com.green.jwt.user.model.UserSignUpReq;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,11 @@ public class UserController {
         log.info("Sign up request: {}", req);
         userService.signUp(req);
         return req.getId();
+    }
+
+    @GetMapping("access-token")
+    public String getAccessToken(HttpServletRequest req){
+        return userService.getAccessToken(req);
     }
 
     @PostMapping("sign-in")

@@ -32,6 +32,9 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(req ->
                                 req.requestMatchers("/api/admin").hasRole(UserRole.ADMIN.name())
                                    .requestMatchers("/api/mentor").hasRole(UserRole.MENTOR.name())
+                                   .requestMatchers(HttpMethod.GET, "/api/user").hasRole(UserRole.USER.name())
+                                   .requestMatchers(HttpMethod.PUT, "/api/user").hasRole(UserRole.USER.name())
+                                        // get 방식일때만 user의 권한이 있어야 됨
                                    .requestMatchers("/api/admin-mentor").hasAnyRole(UserRole.ADMIN.name(), UserRole.MENTOR.name())
                                    .requestMatchers("/api/admin", "/api/mentor", "/api/admin-mentor", "/api/user").authenticated()
 

@@ -2,7 +2,7 @@ constant:
   info-const:
     title: JWT Practice
     description: JWT + Security 고도화
-    version: v0.1
+    version: v0.1 # swagger 용을 작성
 
   jwt-const:
     issuer: green@green.kr #토큰 발행자

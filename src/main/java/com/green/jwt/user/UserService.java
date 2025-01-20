@@ -8,12 +8,16 @@ import com.green.jwt.user.model.UserSelOne;
 import com.green.jwt.user.model.UserSignInReq;
 import com.green.jwt.user.model.UserSignInRes;
 import com.green.jwt.user.model.UserSignUpReq;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
+
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -59,6 +63,16 @@ public class UserService {
                 .id(userSelOne.getId())
                 .name(userSelOne.getName())
                 .build();
+    }
+
+    public String getAccessToken(HttpServletRequest req) {
+        Cookie cookie = Optional.ofNullable(cookieUtils.getCookie(req,jwtConst.getRefreshTokenCookieName())).orElseThrow(
+                () -> {throw new RuntimeException("AccessToken 재발행 불가");}
+        );
+        // 쿠키를 가져오고 거기서 리프래쉬 토큰을 가지고 옴 + null채크
+        String refreshToken = cookie.getValue();
+        JwtUser jwtUser = jwtTokenProvider.getJwtUserFromToken(refreshToken);
+        return jwtTokenProvider.generateAccessToken(jwtUser);
     }
 
 }

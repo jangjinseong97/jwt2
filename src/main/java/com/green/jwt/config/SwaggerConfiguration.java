@@ -29,6 +29,8 @@ import org.springframework.context.annotation.Configuration;
 //        , bearerFormat = "JWT"
 //        , scheme = "Bearer"
 //)
+
+//yaml 설정으로 인해 di를 받아서 작성됨
 @Configuration
 @RequiredArgsConstructor
 public class SwaggerConfiguration {
